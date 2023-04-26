@@ -1,0 +1,10 @@
+<div class="app-header">
+    <div class="wrapper">
+        <img src="icon.png" alt="Logo`">
+        <div 
+        *ngIf="user"
+        class="app-header__user-info">
+            <span (click)="logoutUser()">[==X==]</span>
+        </div>
+    </div>
+</div>
