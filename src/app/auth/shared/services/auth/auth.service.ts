@@ -6,11 +6,11 @@ import { Observable, map } from 'rxjs';
 
 export interface User {
     email: string,
-    password: boolean
-    id: string,
+    password: string,
+    id: string
 }
 
-export const Api: string = 'http://localhost:3000/users'
+export const authApi: string = 'http://localhost:3000/users'
 
 @Injectable()
 export class AuthService {
@@ -23,25 +23,30 @@ export class AuthService {
         const header = new HttpHeaders({ 'Content-Type': 'application/json' });
         const data = { email: email, password: password }
 
-        const newUser = this.http.post<any>(Api, data, { headers: header })
-        this.store.set('user', newUser)
-        return newUser
+        const newUser = this.http.post<any>(authApi, data, { headers: header })
+        return newUser.pipe(map(x => {
+            this.store.set('user', x);
+            localStorage.setItem('user', JSON.stringify(x))
+            return x
+        }))
     }
-
-    signOut() {
-        this.store.set('user', null);
-    }
-
+    
     signin(email: string, password: string): Observable<any> | null {
-        const user = this.http.get<any[]>(`${Api}?email=${email}&password=${password}`)
+        const user = this.http.get<any[]>(`${authApi}?email=${email}&password=${password}`)
         return user.pipe(map( x => {
             if(x.length > 0) {
                 this.store.set('user', x[0])
+                localStorage.setItem('user', JSON.stringify(x[0]))
                 return x[0]
             } else {
                 this.store.set('user', null)
                 return null
             }
         }))
+    }
+
+    signOut() {
+        this.store.set('user', null);
+        localStorage.removeItem('user')
     }
 }

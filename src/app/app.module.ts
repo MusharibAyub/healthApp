@@ -9,8 +9,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 
 import { AuthModule } from './auth/auth.module';
+import { HealthModule } from './health/health.module';
 
-export const ROUTES: Routes = []
+export const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/schedule' }
+]
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ export const ROUTES: Routes = []
   imports: [
     BrowserModule,
     AuthModule,
+    HealthModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [

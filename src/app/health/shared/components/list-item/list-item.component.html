@@ -1,0 +1,36 @@
+<div class="list-item">
+    <a [routerLink]="['../meals', item.id]">
+        <p class="list-item __name">{{ item.name }}</p>
+        <p class="list-item __ingredients">
+            <span>
+                {{ item.ingredients }}
+            </span>
+        </p>
+    </a>
+
+    <div 
+    *ngIf="toggled"
+    class="list-item __delete">
+        <p>Delete item?</p>
+        <button 
+        class="confirm"
+        type="button"
+        (click)="removeItem()">
+            Yes
+        </button>
+        <button 
+        class="confirm"
+        type="button"
+        (click)="toggle()">
+            No
+        </button>
+    </div>
+
+    <button 
+    *ngIf="!toggled"
+    class="trash"
+    type="button"
+    (click)="toggle()">
+        <img src="/assets/img/remove.svg" alt="remove">
+    </button>
+</div>

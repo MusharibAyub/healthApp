@@ -1,24 +1,75 @@
 {
   "users": [
     {
-      "email": "test@test.com",
-      "password": "asdxz",
+      "email": "user1@user.com",
+      "password": "user1",
       "id": 1
     },
     {
-      "email": "asdf@dsa",
-      "password": "pass",
+      "email": "user2@user.com",
+      "password": "user2",
       "id": 2
     },
     {
-      "email": "something@sa",
-      "password": "passs",
+      "email": "user3@user.com",
+      "password": "user3",
       "id": 3
+    }
+  ],
+  "meals": [
+    {
+      "id": 1,
+      "userId": 3,
+      "name": "break3",
+      "ingredients": [
+        "egg1",
+        "bread",
+        "milk"
+      ]
     },
     {
-      "email": "asdfg@ho",
-      "password": "passssd",
+      "name": "lunch3",
+      "ingredients": [
+        "food1",
+        "food2"
+      ],
+      "userId": 3,
+      "id": 2
+    },
+    {
+      "name": "break1",
+      "ingredients": [
+        "egg1",
+        "egg2"
+      ],
+      "userId": 1,
       "id": 4
+    },
+    {
+      "name": "lunch1",
+      "ingredients": [
+        "luch1"
+      ],
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "name": "dinner1",
+      "ingredients": [
+        "dinner",
+        "and dinner"
+      ],
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "name": "dinner3",
+      "ingredients": [
+        "chicken dinner",
+        "turkey dinner"
+      ]
     }
   ]
 }

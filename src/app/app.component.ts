@@ -24,6 +24,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.store.select<User | null>('user')
+    const user = localStorage.getItem('user')
+    if (user) {
+      this.store.set('user', JSON.parse(user))
+    }
   }
 
   async onLogout() {

@@ -1,0 +1,79 @@
+<div class="meal-form">
+    <form [formGroup]="form">
+        <div class="meal-form __name">
+            <label>
+                <h3>Meal name</h3>
+                <input 
+                type="text"
+                placeholder="e.g. English Breakfast"
+                formControlName="name" />
+            </label>
+        </div>
+        
+        <div class="meal-form __food">
+            <div class="meal-form __subtitle">
+                <h3>Food</h3>
+                <button
+                type="button"
+                class="meal-form __add"
+                (click)="addIngredient()">
+                    <img src="assets/img/add-white.svg" alt="" />
+                    Add food
+                </button>
+            </div>
+
+            <div formArrayName="ingredients">
+                <label *ngFor="let c of ingredients.controls; index as i">
+                    <input 
+                    type="text" 
+                    [formControlName]="i"
+                    placeholder="e.g. Eggs" />
+                    <span
+                    class="meal-form __remove"
+                    (click)="removeIngredient(i)">
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="meal-form __submit">
+            <div>
+                <button
+                *ngIf="!exists"
+                type="button"
+                class="button"
+                (click)="createMeal()">
+                    Create meal
+                 </button>
+                <button
+                *ngIf="exists"
+                type="button"
+                class="button"
+                (click)="updateMeal()">
+                    Save
+                 </button>
+                 <a 
+                 class="button button--cancel"
+                 [routerLink]="['/meals']">
+                 Cancel
+                </a>
+            </div>
+
+            <div class="meal-form __delete" *ngIf="exists">
+                <div *ngIf="toggled">
+                    <p>Delete item?</p>
+                    <button class="confirm" type="button" (click)="removeMeal()">
+                        Yes
+                    </button>
+                    <button class="confirm" type="button" (click)="toggle()">
+                        No
+                    </button>
+                </div>
+        
+                <button *ngIf="!toggled" class="button button--delete" type="button" (click)="toggle()">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

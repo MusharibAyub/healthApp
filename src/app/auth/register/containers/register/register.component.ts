@@ -21,7 +21,6 @@ export class RegisterComponent {
   async signup(event: any) {
     const { email, password } = event.value;
     const newUser = await this.authService.signup(email, password);
-    newUser.subscribe(x => console.log(x));
-    this.router.navigate(['/']);
+    newUser.subscribe(x => this.router.navigate(['/']))
   }
 }
