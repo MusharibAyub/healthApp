@@ -3,16 +3,19 @@ import { pluck, distinctUntilChanged } from 'rxjs/operators';
 
 import { User } from './app/auth/shared/services/auth/auth.service';
 import { Meal } from './app/health/shared/services/meals/meals.service';
+import { Workout } from './app/health/shared/services/workouts/workouts.service';
 
 export interface State {
   user: User | null,
   meals: Meal[],
+  workouts: Workout[]
   [key: string]: any
 }
 
 const state: State = {
   user: null,
-  meals: []
+  meals: [],
+  workouts: []
 };
 
 export class Store {

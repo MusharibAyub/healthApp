@@ -1,1 +1,31 @@
-<p>workouts works!</p>
+<div class="workouts">
+    <div class="workouts __title">
+        <h1>
+            <img src="assets/img/workout.svg" alt="workouts">
+            Your workouts
+        </h1>
+        <a 
+        class="btn__add"
+        routerLink="/workouts/new">
+            <img src="assets/img/add-white.svg" alt="">
+            New workout
+        </a>
+    </div>
+    <div *ngIf="workouts$ | async as workouts; else loading">
+        <div class="message" *ngIf="!workouts.length">
+            <img src="/assets/img/face.svg" alt="face">
+            No workouts, add a new workout to start
+        </div>
+        <app-list-item 
+        *ngFor="let workout of workouts"
+        [item]="workout"
+        (remove)="deleteItem($event)">
+        </app-list-item>
+    </div>
+    <ng-template #loading>
+        <div class="message">
+            <img src="/assets/img/loading.svg" alt="loading">
+            Fetching workouts......
+        </div>
+    </ng-template>
+</div>

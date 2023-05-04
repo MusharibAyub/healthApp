@@ -1,0 +1,62 @@
+<div class="workout-form">
+    <form [formGroup]="form">
+        <div class="workout-form __name">
+            <label>
+                <h3>Workout name</h3>
+                <input 
+                type="text"
+                placeholder="e.g. English Breakfast"
+                formControlName="name" />
+            </label>
+            <label>
+                <h3>Workout type</h3>
+                <p>{{this.form.value | json}}</p>
+                <app-workout-type
+                    formControlName="type">
+                </app-workout-type>
+            </label>
+        </div>
+        
+        
+
+        <div class="workout-form __submit">
+            <div>
+                <button
+                *ngIf="!exists"
+                type="button"
+                class="button"
+                (click)="createWorkout()">
+                    Create workout
+                 </button>
+                <button
+                *ngIf="exists"
+                type="button"
+                class="button"
+                (click)="updateWorkout()">
+                    Save
+                 </button>
+                 <a 
+                 class="button button--cancel"
+                 [routerLink]="['/workouts']">
+                 Cancel
+                </a>
+            </div>
+
+            <div class="workout-form __delete" *ngIf="exists">
+                <div *ngIf="toggled">
+                    <p>Delete item?</p>
+                    <button class="confirm" type="button" (click)="removeWorkout()">
+                        Yes
+                    </button>
+                    <button class="confirm" type="button" (click)="toggle()">
+                        No
+                    </button>
+                </div>
+        
+                <button *ngIf="!toggled" class="button button--delete" type="button" (click)="toggle()">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MealsService } from './services/meals/meals.service';
+import { WorkoutsService } from './services/workouts/workouts.service';
 
 import { ListItemComponent } from './components/list-item/list-item.component';
 
@@ -26,7 +27,8 @@ export class SharedModule {
     return{
       ngModule: SharedModule,
       providers: [
-        MealsService
+        MealsService,
+        WorkoutsService
       ]
     }
   }
