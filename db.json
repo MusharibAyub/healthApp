@@ -24,7 +24,7 @@
       "ingredients": [
         "egg1",
         "bread",
-        "milk"
+        "milk 1"
       ]
     },
     {
@@ -70,9 +70,16 @@
         "chicken dinner",
         "turkey dinner"
       ]
+    },
+    {
+      "name": "test meal",
+      "ingredients": [
+        "foof ",
+        "food"
+      ],
+      "userId": 3,
+      "id": 8
     }
   ],
-  "workouts": [
-    
-  ]
+  "workouts": []
 }
