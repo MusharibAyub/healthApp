@@ -5,12 +5,12 @@ import { Observable } from 'rxjs'
 import { Store } from "src/store";
 
 export interface Workout {
-    id: string,
+    id?: string,
     name: string,
     type: string,
     strength: any,
     endurance: any,
-    userId: string
+    userId?: string
 }
 
 export const workoutsApi: string = 'http://localhost:3000/workouts'
@@ -33,14 +33,14 @@ export class WorkoutsService {
         return this.http.get<Workout>(`${workoutsApi}?userId=${uid}&id=${id}`)
     }
 
-    addWorkout(name: string, ingredients: string[], userId: string | undefined): Observable<Workout> | null {
-        const header = new HttpHeaders({ 'Content-Type': 'application/json' });
+    addWorkout(details: Workout, userId: string | undefined) {
+    const header = new HttpHeaders({ 'Content-Type': 'application/json' });
         if(userId) {
-            const data = {name: name, ingredients: ingredients, userId: userId};
-            const newWorkout = this.http.post<Workout>(workoutsApi, data, {headers: header});
+            details.userId = userId;
+            const newWorkout = this.http.post<Workout>(workoutsApi, details, {headers: header});
             newWorkout.subscribe((x: Workout) => {
                 const workouts = [...this.store.value.workouts, x];
-                this.store.set('meals', workouts)
+                this.store.set('workouts', workouts)
             })
             return newWorkout        
         }
@@ -58,11 +58,9 @@ export class WorkoutsService {
         )    
     }
 
-    updateWorkout(workout: Workout) {
-        console.log(workout)
+    updateWorkout(workout: Workout, id: any) {
         const header = new HttpHeaders({ 'Content-Type': 'application/json' });
-        this.http.put<Workout>(`${workoutsApi}/${workout.id}`, workout, { headers: header }).subscribe(workout => {
-            console.log(workout)
+        this.http.patch<Workout>(`${workoutsApi}/${id.id}`, workout, { headers: header }).subscribe(workout => {
             const workouts = this.store.value.workouts;
             const updatedWorkouts = workouts.filter(x => x.id !== workout.id).push(workout)
             this.store.set('workouts', updatedWorkouts)

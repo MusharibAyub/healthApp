@@ -36,7 +36,7 @@ export class WorkoutComponent implements OnInit {
   }
    
   addWorkout(event: any) {
-    const result = this.workoutsService.addWorkout(event.name, event.ingredients, this.store.value.user?.id);
+    const result = this.workoutsService.addWorkout(event, this.store.value.user?.id);
     if(result) {
       this.router.navigate(['/workouts']);
     } else {
@@ -45,7 +45,7 @@ export class WorkoutComponent implements OnInit {
   }
 
   updateWorkout(event: Workout) {
-    this.workoutsService.updateWorkout(event)
+    this.workoutsService.updateWorkout(event, this.route.snapshot.params)
   }
 
   removeWorkout(id: string) {

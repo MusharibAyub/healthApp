@@ -5,12 +5,11 @@
                 <h3>Workout name</h3>
                 <input 
                 type="text"
-                placeholder="e.g. English Breakfast"
+                [placeholder]="placeholder"
                 formControlName="name" />
             </label>
             <label>
                 <h3>Workout type</h3>
-                <h3> {{this.form.value | json}} </h3>
                 <app-workout-type
                     formControlName="type">
                 </app-workout-type>

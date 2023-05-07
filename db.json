@@ -81,5 +81,36 @@
       "id": 8
     }
   ],
-  "workouts": []
+  "workouts": [
+    {
+      "name": "Benchpress",
+      "type": "strength",
+      "strength": {
+        "reps": 10,
+        "sets": 2,
+        "weight": 5
+      },
+      "endurance": {
+        "distance": 0,
+        "duration": 0
+      },
+      "userId": 3,
+      "id": 1
+    },
+    {
+      "name": "Treadmill",
+      "type": "endurance",
+      "strength": {
+        "reps": 0,
+        "sets": 0,
+        "weight": 0
+      },
+      "endurance": {
+        "distance": 2,
+        "duration": 35
+      },
+      "userId": 3,
+      "id": 2
+    }
+  ]
 }

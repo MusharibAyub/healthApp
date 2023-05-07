@@ -1,17 +1,21 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { HttpClientModule } from '@angular/common/http';
+
+import { ListItemComponent } from './components/list-item/list-item.component';
+
+import { JoinPipe } from './pipes/join.pipe';
+import { WorkoutPipe } from './pipes/workout.pipe';
 
 import { MealsService } from './services/meals/meals.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
 
-import { ListItemComponent } from './components/list-item/list-item.component';
-
 @NgModule({
   declarations: [
-    ListItemComponent
+    ListItemComponent,
+    JoinPipe,
+    WorkoutPipe
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     RouterModule
   ],
   exports: [
-    ListItemComponent
+    ListItemComponent,
+    JoinPipe,
+    WorkoutPipe
   ]
 })
 export class SharedModule {

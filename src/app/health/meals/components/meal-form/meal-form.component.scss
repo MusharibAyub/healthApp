@@ -163,14 +163,14 @@
         opacity: .4;
         cursor: not-allowed;
       }
-      &.--cancel {
+      &--cancel {
         background: #fff;
         color: #545e6f;
         &:hover {
           background: #fff;
         }
       }
-      &.--delete {
+      &--delete {
         background: #d73a49;
         align-self: flex-start;
         &:hover {

@@ -50,41 +50,18 @@ export class WorkoutFormComponent implements OnChanges{
     private store: Store
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // if(this.data && this.data.length > 0) {
-    //   const meal = this.data[0]
-    //   this.exists = true
-
-    //   this.form.patchValue(meal)
-
-    //   this.emptyIngredients()
-
-    //   if(meal.ingredients) {
-    //     for(const item of meal.ingredients) {
-    //       this.ingredients.push(new FormControl(item));
-    //     }
-    //   } 
-    // }
+  get placeholder () {
+    return `eg. ${this.form.get('type')?.value === 'strength' ? 'Benchpress' : 'Treadmill'}`
   }
 
-  // emptyIngredients() {
-  //   while(this.ingredients.controls.length) {
-  //     this.ingredients.removeAt(0)
-  //   }
-  // }
-
-  // get ingredients() {
-  //   return this.form.get('ingredients') as FormArray
-  // }
-
-  // addIngredient() {
-  //   this.ingredients.push(new FormControl(''));
-  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.data && this.data.length > 0) {
+      const workout = this.data[0]
+      this.form.patchValue(workout)
+      this.exists = true
   
-  // removeIngredient(index: number) {
-  //   this.ingredients.removeAt(index);
-  // }
-
+    }
+  }
   createWorkout () {
     if(this.form.valid){
       this.create.emit(this.form.value);
@@ -96,15 +73,9 @@ export class WorkoutFormComponent implements OnChanges{
   }
 
   updateWorkout() {
-    // if(this.form.valid){
-    //   const data = {
-    //     id: this.data[0].id,
-    //     userId: this.data[0].userId,
-    //     name: this.form.value.name,
-    //     ingredients: this.form.value.ingredients
-    //   }
-    //   this.update.emit(data);
-    // }
+    if(this.form.valid){
+      this.update.emit(this.form.value);
+    }
   }
 
   toggle() {

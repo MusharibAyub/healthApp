@@ -22,4 +22,8 @@ export class ListItemComponent {
   toggle() {
     this.toggled = !this.toggled
   }
+
+  getRoute(item: any) {
+    return [`../${ item.ingredients ? 'meals' : 'workouts' }/`, item.id]
+  }
 }
