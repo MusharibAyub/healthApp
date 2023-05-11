@@ -20,7 +20,7 @@
     {
       "id": 1,
       "userId": 3,
-      "name": "break3",
+      "name": "Break3",
       "ingredients": [
         "egg1",
         "bread",
@@ -28,13 +28,13 @@
       ]
     },
     {
-      "name": "lunch3",
+      "id": 2,
+      "userId": 3,
+      "name": "Lunch3",
       "ingredients": [
         "food1",
         "food2"
-      ],
-      "userId": 3,
-      "id": 2
+      ]
     },
     {
       "name": "break1",
@@ -65,20 +65,20 @@
     {
       "id": 7,
       "userId": 3,
-      "name": "dinner3",
+      "name": "Dinner3",
       "ingredients": [
         "chicken dinner",
         "turkey dinner"
       ]
     },
     {
-      "name": "test meal",
+      "id": 8,
+      "userId": 3,
+      "name": "Test Meal",
       "ingredients": [
         "foof ",
         "food"
-      ],
-      "userId": 3,
-      "id": 8
+      ]
     }
   ],
   "workouts": [
@@ -112,5 +112,8 @@
       "userId": 3,
       "id": 2
     }
+  ],
+  "schedule": [
+    
   ]
 }

@@ -1,0 +1,18 @@
+<div class="calendar">
+    <app-schedule-controls
+        [selected]="selectedDay"
+        (move)="onChange($event)">
+    </app-schedule-controls>
+    <app-schedule-days
+        [selected]="selectedDayIndex"
+        (select)="selectDay($event)">
+    </app-schedule-days>
+    <app-schedule-section
+        *ngFor="let section of sections"
+        [name]="section.name"
+        [section]="section.key"
+        [scheduleDetail]="schedule? schedule[section.key] || {meals: [], workouts: []} : {meals: [], workouts: []}"
+        (select)="onSelect($event)">
+    </app-schedule-section>
+    <p>{{schedule | json}}</p>
+</div>

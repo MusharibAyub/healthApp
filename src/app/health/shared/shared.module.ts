@@ -10,6 +10,7 @@ import { WorkoutPipe } from './pipes/workout.pipe';
 
 import { MealsService } from './services/meals/meals.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
+import { ScheduleService } from './services/schedule/schedule.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         MealsService,
-        WorkoutsService
+        WorkoutsService,
+        ScheduleService
       ]
     }
   }

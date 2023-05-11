@@ -1,0 +1,13 @@
+<div class="controls">
+    <button
+        type="button"
+        (click)="moveDate(offSet - 1)">
+        <img src="assets/img/chevron-left.svg" alt="chevron-left">
+    </button>
+    <p>{{ selected | date:'MMMM d, YYYY ' }}</p>
+    <button
+        type="button"
+        (click)="moveDate(offSet + 1)">
+        <img src="assets/img/chevron-right.svg" alt="chevron-left">
+    </button>
+</div>
