@@ -46,7 +46,8 @@ export class ScheduleComponent implements OnInit, OnDestroy{
     this.workoutsService.getWorkouts(this.store.value.user?.id);
 
     this.subscription = [
-      this.scheduleService.schedule$.subscribe()
+      this.scheduleService.schedule$.subscribe(),
+      this.scheduleService.getSchedule().subscribe()
     ];
   }
 
@@ -81,7 +82,6 @@ export class ScheduleComponent implements OnInit, OnDestroy{
   }
 
   onUpdate(data: any) {
-    this.scheduleService.update(data);
-    this.onCancel();
+    this.scheduleService.update(data).subscribe((x: any) => console.log(x));
   }
 }

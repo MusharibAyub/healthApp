@@ -74,7 +74,7 @@
     {
       "id": 8,
       "userId": 3,
-      "name": "Test Meal",
+      "name": "Test Meal 101",
       "ingredients": [
         "foof ",
         "food"
@@ -114,6 +114,83 @@
     }
   ],
   "schedule": [
-    
+    {
+      "userId": 3,
+      "date": "2023-05-14T19:00:00.000Z",
+      "morning": {
+        "meals": [
+          2,
+          7
+        ],
+        "workouts": [
+          2
+        ]
+      },
+      "id": 1,
+      "lunch": {
+        "meals": [
+          1,
+          2
+        ],
+        "workouts": [
+          2
+        ]
+      },
+      "evening": {
+        "workouts": [
+          2
+        ],
+        "meals": [
+          8
+        ]
+      },
+      "snacks": {
+        "meals": [
+          8
+        ],
+        "workouts": [
+          1
+        ]
+      }
+    },
+    {
+      "userId": 3,
+      "date": "2023-05-13T19:00:00.000Z",
+      "morning": {
+        "meals": [
+          1
+        ],
+        "workouts": [
+          1
+        ]
+      },
+      "id": 2,
+      "lunch": {
+        "meals": [
+          2,
+          7
+        ],
+        "workouts": [
+          2
+        ]
+      },
+      "evening": {
+        "meals": [
+          2
+        ],
+        "workouts": [
+          1
+        ]
+      },
+      "snacks": {
+        "workouts": [
+          1,
+          2
+        ],
+        "meals": [
+          2
+        ]
+      }
+    }
   ]
 }

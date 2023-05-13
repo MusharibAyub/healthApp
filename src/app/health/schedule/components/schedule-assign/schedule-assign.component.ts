@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 
 import { Meal } from 'src/app/health/shared/services/meals/meals.service';
 import { Workout } from 'src/app/health/shared/services/workouts/workouts.service';
-import { Store } from 'src/store';
 
 @Component({
   selector: 'app-schedule-assign',
@@ -32,10 +31,6 @@ export class ScheduleAssignComponent implements OnChanges {
   @Output()
   cancel = new EventEmitter<any>;
 
-  constructor(
-    private store: Store
-  ) {}
-
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(this.section, this.type, this.date, this.list)
   }
@@ -46,11 +41,9 @@ export class ScheduleAssignComponent implements OnChanges {
 
   updateAssign() {
     this.update.emit({
-      userId: this.store.value.user?.id,
-      date: this.date,
-      [this.section]: {
-        [this.type]: this.assigned
-      }
+      section: this.section,
+      type: this.type, 
+      assigned: this.assigned.sort()
     })
   }
 

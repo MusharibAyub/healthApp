@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { Store } from "src/store";
 
-import { BehaviorSubject, Observable, map, tap } from "rxjs";
+import { BehaviorSubject, Observable, map, switchMap, tap, of } from "rxjs";
 
 export interface scheduleDetail {
     meals?: string[],
@@ -31,7 +31,7 @@ export class ScheduleService {
     schedule$: Observable<any> = this.date$.pipe(
         tap((next: any) => {
             this.store.set('date', next);
-            const response = this.getSchedule(next)
+            const response = this.getSchedule()
             if(!response) {
                 const data = {
                     userId: this.store.value.user?.id,
@@ -53,41 +53,63 @@ export class ScheduleService {
         this.date$.next(date);
     }
 
-    getSchedule(date: Date) {
-        let response:Schedule | null = null;
-        this.http.get<any[]>(`${scheduleApi}?userId=${this.store.value.user?.id}&date=${date}`)
-            .pipe(tap((res: any) => {
+    getSchedule() {
+        return this.http.get<any[]>(`${scheduleApi}?userId=${this.store.value.user?.id}&date=${this.store.value.date?.toISOString()}`)
+            .pipe(map((res: any) => {
                 if(res.length > 0) {
-                    response = res[0]
+                    this.store.set('schedule', res[0]);
+                    return res[0];
                 } else {
-                    response = null
-                }
-            }))
-        return response
-    }
-
-    update(data: Schedule) {
-        console.log(data, 'start of update service')
-        this.http.get<any[]>(`${scheduleApi}?userId=${this.store.value.user?.id}&date=${data.date}`)
-            .pipe(tap((res: any) => {
-                if(res.length > 0) {
-                    this.updateold(data, res[0].id).subscribe((schedule: Schedule) => {
-                        this.store.set('schedule', schedule);
-                    });
-                } else {
-                    this.addnew(data).subscribe((schedule: Schedule) => {
-                        this.store.set('schedule', schedule);
-                    });
+                    const data = {
+                        userId: this.store.value.user?.id,
+                        date: this.store.value.date
+                    };
+                    this.store.set('schedule', data);
+                    return null;
                 }
             }))
     }
 
-    addnew(data: Schedule) {
+    update(data: any) {
+        // console.log('data Received', data)
+        return this.http.get<any[]>(`${scheduleApi}?userId=${this.store.value.user?.id}&date=${this.store.value.date?.toISOString()}`)
+            .pipe(switchMap((res: any) => {
+                // console.log('response from first Api call', res)
+                if(res.length > 0) {
+                    if(data.section in res[0]) {
+                        const newData = { [data.section]: Object.assign(res[0][data.section], { [data.type]: data.assigned }) }
+                        // console.log('data send in case 1', newData) 
+                        return this.updateold(newData, res[0].id).pipe(tap((mapRes: any) => {
+                            // console.log('data received in case 1', mapRes)
+                            this.store.set('schedule', mapRes)
+                        }))
+                    } else {
+                        const newData = { [data.section]: { [data.type]: data.assigned } }
+                        // console.log('data send in case 2', newData) 
+                        const response = this.updateold(newData, res[0].id);
+                        return response.pipe(tap((mapRes: any) => {
+                            // console.log('data received in case 2', mapRes)
+                            this.store.set('schedule', mapRes)
+                        }));
+                    }
+                } else {
+                    const newData = {userId: this.store.value.user?.id, date: this.store.value.date?.toISOString(), [data.section]: { [data.type]: data.assigned }}
+                    // console.log('data send in case 3', newData)
+                    const response = this.addnew(newData);
+                    return response.pipe(tap((mapRes: any) => {
+                        // console.log('data received in case 3', mapRes)
+                        this.store.set('schedule', mapRes)
+                    }));
+                }
+            }))
+    }
+
+    addnew(data: any) {
         const header = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.post<Schedule>(scheduleApi, data, { headers: header })
     }
 
-    updateold(data: Schedule, id: string) {
+    updateold(data: any, id: string) {
         const header = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.patch<Schedule>(`${scheduleApi}/${id}`, data, { headers: header })
     }
