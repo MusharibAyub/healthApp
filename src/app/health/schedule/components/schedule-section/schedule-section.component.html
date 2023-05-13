@@ -8,7 +8,7 @@
           class="schedule-section __item food"
           *ngIf="scheduleDetail?.meals?.length; else addMeal"
           (click)="onSelect('meals', scheduleDetail?.meals || [])">
-          <span>{{ scheduleDetail?.meals }}</span>
+          <span>{{ mealNames }}</span>
         </div>
         <ng-template #addMeal>
           <div 
@@ -21,7 +21,7 @@
           class="schedule-section __item workout"
           *ngIf="scheduleDetail?.workouts?.length; else addWorkout"
           (click)="onSelect('workouts', scheduleDetail?.workouts || [])">
-          <span>{{ scheduleDetail?.workouts }}</span>
+          <span>{{ workoutNames }}</span>
         </div>
         <ng-template #addWorkout>
           <div 

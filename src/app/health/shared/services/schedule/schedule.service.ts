@@ -31,16 +31,7 @@ export class ScheduleService {
     schedule$: Observable<any> = this.date$.pipe(
         tap((next: any) => {
             this.store.set('date', next);
-            const response = this.getSchedule()
-            if(!response) {
-                const data = {
-                    userId: this.store.value.user?.id,
-                    date: next
-                }
-                this.store.set('schedule', data);
-            } else {
-                this.store.set('schedule', response);
-            }
+            this.getSchedule().subscribe();
         })
     );
 
@@ -54,8 +45,10 @@ export class ScheduleService {
     }
 
     getSchedule() {
+        // console.log('GetSchedule Called')
         return this.http.get<any[]>(`${scheduleApi}?userId=${this.store.value.user?.id}&date=${this.store.value.date?.toISOString()}`)
             .pipe(map((res: any) => {
+                // console.log('getSchdule Response', res)
                 if(res.length > 0) {
                     this.store.set('schedule', res[0]);
                     return res[0];

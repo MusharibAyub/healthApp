@@ -14,5 +14,4 @@
         [scheduleDetail]="schedule? schedule[section.key] || {meals: [], workouts: []} : {meals: [], workouts: []}"
         (select)="onSelect($event)">
     </app-schedule-section>
-    <p>{{schedule | json}}</p>
 </div>
